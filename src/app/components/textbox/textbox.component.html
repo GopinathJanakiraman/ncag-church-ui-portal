@@ -1,0 +1,6 @@
+<div [formGroup]="formGroup" class="form-group">
+  <label [ngClass]="{'error':formGroup.controls[name].dirty && formGroup.controls[name].invalid}"
+    [htmlFor]="id">{{label}}</label>
+  <input type="text" [id]="id" [value]="value" [name]="name" [formControlName]="name" matInput rows="5"
+    autocomplete="off" (keypress)="keyPressAlphaNumeric($event)" />
+</div>

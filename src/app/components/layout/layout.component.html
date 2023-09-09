@@ -1,0 +1,68 @@
+<main class="main">
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="/assets/images/image.png" />
+        </div>
+        <ul class="nav nav-pills flex-column mb-auto mt-5">
+            <li class="nav-item">
+                <a href="#" class="nav-link " aria-current="page">
+                    Pastor<i class="bi bi-chevron-right float-end"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link active">
+                    Member<i class="bi bi-chevron-right float-end"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    Carecell<i class="bi bi-chevron-right float-end"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    Region<i class="bi bi-chevron-right float-end"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    Area<i class="bi bi-chevron-right float-end"></i>
+                </a>
+            </li>
+        </ul>
+    </aside>
+    <section class="content">
+        <header>
+            <div class="header mb-3">
+                <div class="proverb">
+                    <p>
+                        God saw all that he had made and it was very good Genesis 1:31
+                    </p>
+                </div>
+                <div class="username">
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Jegil Ebidoss
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+        </header>
+        <div class="container-fluid mb-5">
+
+            <router-outlet></router-outlet>
+        </div>
+        <footer class="footer">
+            <p>Copyright © {{year}} New Creation AG Church. All Rights Reserved. </p>
+        </footer>
+    </section>
+
+</main>

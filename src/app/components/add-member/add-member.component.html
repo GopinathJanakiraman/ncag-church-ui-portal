@@ -1,0 +1,176 @@
+<h1 class="h3 mb-5 text-gray-800">
+    <span><i class="bi bi-person-vcard-fill mr-2"></i></span>
+    Members
+</h1>
+<div class="card shadow mb-4" *ngIf="occupation.length || 1">
+
+    <div class="card-header"> Details</div>
+    <div class="card-body" [ngClass]="{'formSubmitted':formSubmitted}">
+        <form [formGroup]="memberForm" autocomplete="off">
+
+            <!-- Form Row-->
+            <div class="row gx-3 mb-3">
+                <!-- Form Group (first name)-->
+                <div class="col-md-6">
+                    <label class="small mb-1" for="firstName">First name</label>
+                    <input class="form-control has-validation" formControlName="firstName" id="firstName" type="text"
+                        placeholder="Enter your first name" autocomplete="off">
+                </div>
+                <!-- Form Group (last name)-->
+                <div class="col-md-6">
+                    <label class="small mb-1" for="lastName">Last name</label>
+                    <input class="form-control" formControlName="lastName" id="lastName" type="text"
+                        placeholder="Enter your last name">
+                </div>
+            </div>
+            <!-- Form Row        -->
+            <div class="row gx-3 mb-3">
+                <!-- Form Group (organization name)-->
+                <div class="col-md-6">
+                    <label class="small mb-1">Occupation</label>
+                    <ng-select [items]="occupation" formControlName="occupationDetails" [multiple]="false"
+                        placeholder="Please select Occupation" bindLabel="occupation" [clearable]="false">
+                    </ng-select>
+                </div>
+                <!-- Form Group (location)-->
+                <div class="col-md-6">
+                    <label class="small mb-1" for="email">Email </label>
+                    <input class="form-control" id="email" formControlName="email" type="email"
+                        placeholder="Enter your email" autocomplete="off">
+                </div>
+            </div>
+            <!-- Form Group (email address)-->
+            <div class="row gx-3 mb-3">
+                <div class="mb-3">
+                    <label class="small mb-1" for="address">Address</label>
+                    <input class="form-control" formControlName="address" autocomplete="off" id="address" type="text"
+                        placeholder="Enter your address">
+                </div>
+            </div>
+            <div class="row gx-3 mb-3">
+                <div class="col-md-3 mb-3">
+                    <label class="small mb-1">City</label>
+                    <ng-select [items]="city" formControlName="cityDetails" bindLabel="cityName" [multiple]="false"
+                        placeholder="Please select city" [clearable]="false">
+                    </ng-select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="small mb-1">State</label>
+                    <ng-select [items]="state" formControlName="stateDetails" [multiple]="false"
+                        placeholder="Please select state" bindLabel="stateName" [clearable]="false">
+                    </ng-select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="small mb-1">Country</label>
+                    <ng-select [items]="country" formControlName="countryDetails" [multiple]="false"
+                        placeholder="Please select country" bindLabel="countryName" [clearable]="false">
+                    </ng-select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="small mb-1" for="pincode">Pincode</label>
+                    <input class="form-control" formControlName="pincode" id="pincode" type="number"
+                        placeholder="Enter your pincode">
+                </div>
+            </div>
+            <div class="row gx-3 mb-3">
+                <div class="mb-3 col-md-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input anchor" formControlName="canVisitHouse" type="checkbox"
+                            id="canVisitHouse" checked>
+                        <label class="form-check-label anchor" for="canVisitHouse">Can
+                            visit house</label>
+                    </div>
+
+                </div>
+                <div class="mb-3 col-md-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input anchor" formControlName="isAttendingCHurch" type="checkbox"
+                            id="isAttendingCHurch" checked>
+                        <label class="form-check-label anchor" for="isAttendingCHurch">Is Attending Church</label>
+                    </div>
+
+                </div>
+                <div class="mb-3 col-md-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input anchor" formControlName="isCarecell" type="checkbox"
+                            id="isCarecell">
+                        <label class="form-check-label anchor" for="isCarecell">Is
+                            Attending Carecell</label>
+                    </div>
+
+                </div>
+                <div class="mb-3 col-md-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input anchor" formControlName="isLetterAccepted" type="checkbox"
+                            id="isLetterAccepted" checked>
+                        <label class="form-check-label anchor" for="isLetterAccepted">Is Letter Accepted</label>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Form Row-->
+            <div class="row gx-3 mb-3">
+                <!-- Form Group (phone number)-->
+                <div class="col-md-6">
+                    <label class="small mb-1" for="mobileNo">Phone number</label>
+                    <input class="form-control" id="mobileNo" formControlName="mobileNo" type="number"
+                        placeholder="Enter your phone number" value="555-123-4567">
+                </div>
+                <!-- Form Group (birthday)-->
+                <div class="col-md-6">
+                    <label class="small mb-1" for="dob">Birthday</label>
+                    <input class="form-control" id="dob" formControlName="dob" type="date" name="dob"
+                        placeholder="Enter your birthday" value="06/10/1988">
+                </div>
+            </div>
+            <div class="row gx-3 mb-3">
+                <div class="mb-3 col-md-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input anchor" formControlName="martialStatus" type="checkbox"
+                            id="martialStatus" checked>
+                        <label class="form-check-label anchor" for="martialStatus">Married</label>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row gx-3 mb-3">
+                <div class="col-md-3">
+                    <label class="small mb-1">Religion</label>
+                    <ng-select [items]="religionList" formControlName="religionDetails" [multiple]="false"
+                        placeholder="Please select Religion" bindLabel="religionName" [clearable]="false">
+                    </ng-select>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="small mb-1">Member Type</label>
+                    <ng-select [items]="memberType" formControlName="memberTypeDetails" [multiple]="false"
+                        placeholder="Please select type" bindLabel="memberType" [clearable]="false">
+                    </ng-select>
+                </div>
+
+                <ng-container formArrayName="formArr">
+                    <ng-container *ngFor="let option of formArr['controls']; let i = index;">
+                        <app-textbox [placeholder]="'Enter Facebook UserName'" [label]="option.get('value')?.value"
+                            [name]="'name'" [formGroup]="returnasFB(option)"
+                            [errMsg]="'Please enter a valid company name'"></app-textbox>
+                    </ng-container>
+                </ng-container>
+
+            </div>
+            <div class="row gx-3 mt-5 mb-3">
+                <!-- Save changes button-->
+                <button class="col-md-1 btn btn-primary" (click)="submit()" type="button">Save changes</button>
+                <button class="col-md-1 btn btn-outline-primary ms-2" type="button"
+                    [routerLink]="['/dashboard/member']">
+                    <i class="bi bi-arrow-left"></i>
+                    Back
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="card-body px-4">
+
+    </div>
+</div>

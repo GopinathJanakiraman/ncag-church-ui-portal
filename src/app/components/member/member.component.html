@@ -1,0 +1,50 @@
+<h1 class="h3 mb-5 text-gray-800">
+    <span><i class="bi bi-person-vcard-fill mr-2"></i></span>
+    Members
+</h1>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+
+        <button type="button" class="btn btn-outline-primary float-end" [routerLink]="['/dashboard/add-member']">
+            <i class="bi bi-person-add"></i>
+            Add Member
+        </button>
+    </div>
+    <div class="card-body px-4">
+        <table class="table table-bordered table-hover mt-5 shadow p-3 mb-5 bg-body rounded">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Mobile No</th>
+                    <th>Pastor</th>
+                    <th>Area</th>
+                    <th>Region</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="anchor" *ngFor="let mem of memberList; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{mem.firstName}}</td>
+                    <td>{{mem.mobileNo}}</td>
+                    <td>{{mem.pastor}}</td>
+                    <td>{{mem.area}}</td>
+                    <td>{{mem.region}}</td>
+                    <td><i class="bi bi-pencil-square"></i></td>
+                </tr>
+            </tbody>
+
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
