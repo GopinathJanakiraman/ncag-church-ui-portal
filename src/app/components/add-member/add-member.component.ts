@@ -12,6 +12,7 @@ import { NcagService } from 'src/app/core/service/ncag.service';
 export class AddMemberComponent implements OnInit {
   religionList: any = [];
   memberType: any = [];
+  area: any = [];
   city: any = [];
   state: any = [];
   country: any = [];
@@ -45,6 +46,7 @@ export class AddMemberComponent implements OnInit {
       .subscribe((data: any) => {
         this.religionList = data.religionList;
         this.memberType = data.memberType;
+        this.area = data.areaList;
         this.city = data.cityList;
         this.state = data.stateList;
         this.country = data.countryList;
@@ -72,6 +74,7 @@ export class AddMemberComponent implements OnInit {
       isLetterAccepted: [false],
       martialStatus: [false],
       address: [null, [Validators.required]],
+      areaDetails: [null, [Validators.required]],
       cityDetails: [null, [Validators.required]],
       stateDetails: [null, [Validators.required]],
       countryDetails: [null, [Validators.required]],

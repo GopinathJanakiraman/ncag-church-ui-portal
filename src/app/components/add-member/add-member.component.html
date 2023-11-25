@@ -41,10 +41,16 @@
             </div>
             <!-- Form Group (email address)-->
             <div class="row gx-3 mb-3">
-                <div class="mb-3">
+                <div class="mb-3 col-md-6">
                     <label class="small mb-1" for="address">Address</label>
-                    <input class="form-control" formControlName="address" autocomplete="off" id="address" type="text"
-                        placeholder="Enter your address">
+                    <textarea class="form-control" formControlName="address" autocomplete="off" id="address" 
+                        placeholder="Enter your address"></textarea>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="small mb-1">Area</label>
+                    <ng-select [items]="area" formControlName="areaDetails" bindLabel="name" [multiple]="false"
+                        placeholder="Please select area" [clearable]="false">
+                    </ng-select>
                 </div>
             </div>
             <div class="row gx-3 mb-3">
