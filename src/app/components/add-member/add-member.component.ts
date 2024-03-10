@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { formatDate } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AppSettingsModule } from 'src/app/core/app-settings/app-settings-module';
 import { NcagService } from 'src/app/core/service/ncag.service';
@@ -20,25 +21,27 @@ export class AddMemberComponent implements OnInit {
   formSubmitted: boolean = false;
 
   memberForm!: FormGroup;
-  formarr!: FormArray;
-  social: any = [
-    {
-      name: 'fb',
-      value: 'ww',
-    },
-    {
-      name: 'tw',
-      value: 'tw',
-    },
-  ];
+  memberDetails!: any;
+
+  @Input('id') pathId?: number;
+
   constructor(
     private formBuilder: FormBuilder,
     private service: NcagService,
     private toaster: ToastrService
-  ) {}
+  ) { }
   ngOnInit(): void {
     this.getAllStaticContent();
     this.initForm();
+    if (this.pathId) {
+      this.service
+        .commonGETCall(AppSettingsModule.membersService + '/' + this.pathId).subscribe((data: any) => {
+          this.memberDetails = data;
+          this.memberForm.patchValue(this.memberDetails);
+        }, (err: any) => {
+          this.toaster.error("Something went wrong", "Error !");
+        })
+    }
   }
   getAllStaticContent() {
     this.service
@@ -56,63 +59,66 @@ export class AddMemberComponent implements OnInit {
           stateDetails: this.state[0],
           countryDetails: this.country[0],
         });
+      }, (err: any) => {
+        this.toaster.error("Something went wrong", "Error !");
       });
   }
   initForm() {
     this.memberForm = this.formBuilder.group({
       id: [0],
-      areaPastorId: [1],
+      areaPastorDetails: this.formBuilder.group({
+        id: [1]
+      }),
       oldChurchId: [1],
+      pastorId: [],
       email: [null, [Validators.required, Validators.email]],
       firstName: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
       mobileNo: [null, [Validators.required]],
-      occupationDetails: [null, [Validators.required]],
+      occupationId: [null, [Validators.required]],
       canVisitHouse: [false],
       isAttendingCHurch: [false],
       isCarecell: [false],
       isLetterAccepted: [false],
       martialStatus: [false],
       address: [null, [Validators.required]],
-      areaDetails: [null, [Validators.required]],
-      cityDetails: [null, [Validators.required]],
-      stateDetails: [null, [Validators.required]],
-      countryDetails: [null, [Validators.required]],
+      carecellId: [0, [Validators.required]],
+      areaId: [null, [Validators.required]],
+      cityId: [null, [Validators.required]],
+      stateId: [null, [Validators.required]],
+      countryId: [null, [Validators.required]],
       pincode: [null, [Validators.required]],
-      memberTypeDetails: [this.memberType[0], [Validators.required]],
-      religionDetails: [null, [Validators.required]],
+      memTypeId: [this.memberType[0], [Validators.required]],
+      religionId: [null, [Validators.required]],
       dob: [null, [Validators.required]],
-      formArr: this.formBuilder.array([]),
-    });
-    this.getarr();
-  }
-  getarr() {
-    let formArr = this.memberForm.get('formArr') as FormArray;
-    formArr.push(this.createArr());
-    formArr.push(this.createArr());
-    formArr.patchValue(this.social);
-  }
-  get formArr() {
-    return this.memberForm.get('formArr') as FormArray;
-  }
-  returnasFB(y: any) {
-    return y as FormGroup;
-  }
-  createArr() {
-    return this.formBuilder.group({
-      name: [null, [Validators.required]],
-      value: [null, [Validators.required]],
+      createAt: null
     });
   }
+
+
   submit() {
     this.formSubmitted = true;
     if (this.memberForm.valid) {
       let postData = this.memberForm.getRawValue();
-      this.service
-        .commonPOSTCall(AppSettingsModule.membersService, postData)
-        .subscribe((response: any) => {
-          this.toaster.success('Member added successfully', 'Success');
-        });
+      postData.dob = new Date(postData.dob)
+      if (this.pathId) {
+        this.service
+          .commonPUTCall(AppSettingsModule.membersService + '/' + this.pathId, postData)
+          .subscribe((response: any) => {
+            this.toaster.success('Member updated successfully', 'Success');
+          }, (err: any) => {
+            this.toaster.error("Something went wrong", "Error !");
+          });
+      }
+      else {
+        this.service
+          .commonPOSTCall(AppSettingsModule.membersService, postData)
+          .subscribe((response: any) => {
+            this.toaster.success('Member added successfully', 'Success');
+          }, (err: any) => {
+            this.toaster.error("Something went wrong", "Error !");
+          });
+      }
     }
   }
 }

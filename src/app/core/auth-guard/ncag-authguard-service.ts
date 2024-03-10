@@ -5,7 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 @Injectable()
 export class NcagAuthGuard {
   public capabilities: any = {};
-  constructor(private cookie: CookieService, private router: Router) {}
+  constructor(private cookie: CookieService, private router: Router) { }
 
   canActivate() {
     let activateStatus: boolean = false;
@@ -13,7 +13,6 @@ export class NcagAuthGuard {
       let loginResponse = JSON.parse(this.cookie.get('login'));
       activateStatus = loginResponse.access_token ? true : false;
     }
-    return true;
 
     if (!activateStatus) {
       this.router.navigate(['/']);

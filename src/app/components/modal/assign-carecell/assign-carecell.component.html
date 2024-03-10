@@ -1,0 +1,97 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">{{ title }}</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="card-body px-4">
+        <div class="row">
+            <!--  <div class="col-md-2">
+               <label>Name</label> <input type="text" [(ngModel)]="firstName" placeholder="Name" name="" class="form-control">
+            </div>
+            <div class="col-md-2">
+                Mobile <input type="text" [(ngModel)]="mobileNo" placeholder="Mobile number" class="form-control">
+             </div> -->
+            <div class="col-md-2">
+                Area <ng-select [items]="area" [(ngModel)]="areaId" bindLabel="name" bindValue="id" [multiple]="false"
+                    placeholder="Please select area" [clearable]="false">
+                </ng-select>
+            </div>
+            <div class="col-md-2">
+                &nbsp;
+                <button type="button" class="btn btn-outline-primary float-end mt-4" (click)="search()">
+                    <i class="bi bi-search"></i>
+                    Search
+                </button>
+            </div>
+            <div class="col-md-2 offset-md-4">
+                &nbsp;
+                <button type="button" class="btn btn-success float-end mt-4"
+                    (click)="assignCarecell(0, areaIdCarecell)">
+
+                    Create New Carecell
+                </button>
+            </div>
+            <div class="col-md-2">
+                &nbsp;
+
+            </div>
+        </div>
+        <table class="table table-bordered table-hover mt-5 shadow p-3 mb-5 bg-body rounded">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Carecell Name</th>
+                    <th>Members</th>
+                    <th>Pastor</th>
+                    <th>Area</th>
+                    <th>Region</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="anchor" *ngFor="let care of carecellList.content; let i = index">
+                    <td>{{(i+1)+((pageNo-1)*size)}}</td>
+                    <td>Carecell {{care.carecellId}}</td>
+                    <td>
+                        @if(care.carecellMembers.length){
+
+                        <div class="member">
+                            <p *ngFor="let care of care.carecellMembers; let k = index">{{care.firstName}}
+                                ({{care.memberTypeDetails.memberType}})</p>
+                        </div>
+                        }
+                    </td>
+                    <td>{{care.pastorName}}</td>
+                    <td>{{care.areaName}}</td>
+                    <td>{{care.regionName}}</td>
+                    <td>
+                        <div class="btnholder">
+                            <button type="button" class="btn btn-success d-block mt-4"
+                                (click)="assignCarecell(care.carecellId, care.areaId)">
+                                Assign Carecell
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngIf="carecellList.content.length == 0">
+                    <td colspan="4" align="center">Records not found</td>
+                </tr>
+            </tbody>
+
+        </table>
+        <!--  <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" *ngIf="pageNo > 1"><a class="page-link" href="javascript:void(0)" (click)="getAllMembers(this.pageNo-1)">Previous</a></li>
+                <ng-container *ngFor="let page of pagesArray">
+                <li class="page-item" [ngClass]="{'active': page == pageNo}" (click)="getAllMembers(page)"><a class="page-link" href="javascript:void(0)">{{page}}</a></li>
+            </ng-container>
+                <li class="page-item" *ngIf="pageNo < memberList.totalPages" (click)="getAllMembers(this.pageNo+1)"><a class="page-link" href="javascript:void(0)">Next</a></li>
+            </ul>
+        </nav> -->
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">{{ closeBtnName }}</button>
+</div>

@@ -1,0 +1,83 @@
+<h1 class="h3 mb-5 text-gray-800">
+    <span><i class="bi bi-person-vcard-fill mr-2"></i></span>
+    Pastor
+</h1>
+<div class="card shadow mb-4">
+
+    <div class="card-header"> Details</div>
+    <div class="card-body" [ngClass]="{'formSubmitted':formSubmitted}">
+        <form [formGroup]="formGrp" autocomplete="off">
+
+            <!-- Form Row-->
+            <div class="row gx-3 mb-3">
+                <div class="col-md-6">
+                    <label class="small mb-1" for="firstName">First Name</label>
+                    <input class="form-control has-validation" formControlName="firstname" id="firstName" type="text"
+                        placeholder="Enter your first name" autocomplete="off">
+                </div>
+                <div class="col-md-6">
+                    <label class="small mb-1" for="mobileNo">Phone number</label>
+                    <input class="form-control" id="mobileNo" formControlName="mobileNo" type="number"
+                        placeholder="Enter your phone number" value="555-123-4567">
+                </div>
+            </div>
+            <div class="row gx-3 mb-3">
+                <div class="mb-3 col-md-6">
+                    <label class="small mb-1" for="address">Address</label>
+                    <textarea class="form-control" formControlName="address" autocomplete="off" id="address"
+                        placeholder="Enter your address"></textarea>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="small mb-1">Area</label>
+                    <ng-select [items]="area" formControlName="areaId" bindValue="id" bindLabel="name"
+                        [multiple]="false" placeholder="Please select area" [clearable]="false">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row gx-3 mb-3">
+                <div class="col-md-3 mb-3">
+                    <label class="small mb-1">City</label>
+                    <ng-select [items]="city" formControlName="cityId" bindValue="id" bindLabel="cityName"
+                        [multiple]="false" placeholder="Please select city" [clearable]="false">
+                    </ng-select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="small mb-1">State</label>
+                    <ng-select [items]="state" formControlName="stateId" bindValue="id" [multiple]="false"
+                        placeholder="Please select state" bindLabel="stateName" [clearable]="false">
+                    </ng-select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="small mb-1">Country</label>
+                    <ng-select [items]="country" formControlName="countryId" bindValue="id" [multiple]="false"
+                        placeholder="Please select country" bindLabel="countryName" [clearable]="false">
+                    </ng-select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="small mb-1" for="pincode">Pincode</label>
+                    <input class="form-control" formControlName="pincode" id="pincode" type="number"
+                        placeholder="Enter your pincode">
+                </div>
+            </div>
+            <div class="row gx-3 mb-3">
+                <label class="small mb-1">Pastor Role</label>
+                <ng-select [items]="roleList" formControlName="roleId" bindValue="id" bindLabel="name"
+                    [multiple]="false" placeholder="Please select area" [clearable]="false">
+                </ng-select>
+            </div>
+            <div class="row gx-3 mt-5 mb-3">
+                <!-- Save changes button-->
+                <button class="col-md-2 btn btn-primary" (click)="submit()" type="button">Save changes</button>
+                <button class="col-md-1 btn btn-outline-primary ms-2" type="button"
+                    [routerLink]="['/dashboard/pastor-list']">
+                    <i class="bi bi-arrow-left"></i>
+                    Back
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="card-body px-4">
+
+    </div>
+</div>

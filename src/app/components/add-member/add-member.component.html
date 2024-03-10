@@ -28,8 +28,8 @@
                 <!-- Form Group (organization name)-->
                 <div class="col-md-6">
                     <label class="small mb-1">Occupation</label>
-                    <ng-select [items]="occupation" formControlName="occupationDetails" [multiple]="false"
-                        placeholder="Please select Occupation" bindLabel="occupation" [clearable]="false">
+                    <ng-select [items]="occupation" formControlName="occupationId" [multiple]="false"
+                        placeholder="Please select Occupation" bindValue="id" bindLabel="occupation" [clearable]="false">
                     </ng-select>
                 </div>
                 <!-- Form Group (location)-->
@@ -48,7 +48,7 @@
                 </div>
                 <div class="col-md-3 mb-3">
                     <label class="small mb-1">Area</label>
-                    <ng-select [items]="area" formControlName="areaDetails" bindLabel="name" [multiple]="false"
+                    <ng-select [items]="area" formControlName="areaId"  bindValue="id" bindLabel="name" [multiple]="false"
                         placeholder="Please select area" [clearable]="false">
                     </ng-select>
                 </div>
@@ -56,19 +56,19 @@
             <div class="row gx-3 mb-3">
                 <div class="col-md-3 mb-3">
                     <label class="small mb-1">City</label>
-                    <ng-select [items]="city" formControlName="cityDetails" bindLabel="cityName" [multiple]="false"
+                    <ng-select [items]="city" formControlName="cityId" bindValue="id" bindLabel="cityName" [multiple]="false"
                         placeholder="Please select city" [clearable]="false">
                     </ng-select>
                 </div>
                 <div class="col-md-3 mb-3">
                     <label class="small mb-1">State</label>
-                    <ng-select [items]="state" formControlName="stateDetails" [multiple]="false"
+                    <ng-select [items]="state" formControlName="stateId" bindValue="id" [multiple]="false"
                         placeholder="Please select state" bindLabel="stateName" [clearable]="false">
                     </ng-select>
                 </div>
                 <div class="col-md-3 mb-3">
                     <label class="small mb-1">Country</label>
-                    <ng-select [items]="country" formControlName="countryDetails" [multiple]="false"
+                    <ng-select [items]="country" formControlName="countryId" bindValue="id" [multiple]="false"
                         placeholder="Please select country" bindLabel="countryName" [clearable]="false">
                     </ng-select>
                 </div>
@@ -127,7 +127,7 @@
                 <div class="col-md-6">
                     <label class="small mb-1" for="dob">Birthday</label>
                     <input class="form-control" id="dob" formControlName="dob" type="date" name="dob"
-                        placeholder="Enter your birthday" value="06/10/1988">
+                        placeholder="Enter your birthday"  value="{{ memberForm.get('dob')?.value | date:'yyyy-MM-dd' }}">
                 </div>
             </div>
             <div class="row gx-3 mb-3">
@@ -143,30 +143,23 @@
             <div class="row gx-3 mb-3">
                 <div class="col-md-3">
                     <label class="small mb-1">Religion</label>
-                    <ng-select [items]="religionList" formControlName="religionDetails" [multiple]="false"
-                        placeholder="Please select Religion" bindLabel="religionName" [clearable]="false">
+                    <ng-select [items]="religionList" formControlName="religionId" [multiple]="false"
+                        placeholder="Please select Religion" bindValue="id" bindLabel="religionName" [clearable]="false">
                     </ng-select>
                 </div>
 
                 <div class="col-md-3">
                     <label class="small mb-1">Member Type</label>
-                    <ng-select [items]="memberType" formControlName="memberTypeDetails" [multiple]="false"
-                        placeholder="Please select type" bindLabel="memberType" [clearable]="false">
+                    <ng-select [items]="memberType" formControlName="memTypeId" [multiple]="false"
+                        placeholder="Please select type" bindValue="id" bindLabel="memberType" [clearable]="false">
                     </ng-select>
                 </div>
 
-                <ng-container formArrayName="formArr">
-                    <ng-container *ngFor="let option of formArr['controls']; let i = index;">
-                        <app-textbox [placeholder]="'Enter Facebook UserName'" [label]="option.get('value')?.value"
-                            [name]="'name'" [formGroup]="returnasFB(option)"
-                            [errMsg]="'Please enter a valid company name'"></app-textbox>
-                    </ng-container>
-                </ng-container>
 
             </div>
             <div class="row gx-3 mt-5 mb-3">
                 <!-- Save changes button-->
-                <button class="col-md-1 btn btn-primary" (click)="submit()" type="button">Save changes</button>
+                <button class="col-md-2 btn btn-primary" (click)="submit()" type="button">Save changes</button>
                 <button class="col-md-1 btn btn-outline-primary ms-2" type="button"
                     [routerLink]="['/dashboard/member']">
                     <i class="bi bi-arrow-left"></i>

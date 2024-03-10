@@ -1,0 +1,41 @@
+<h1 class="h3 mb-5 text-gray-800">
+    <span><i class="bi bi-person-vcard-fill mr-2"></i></span>
+    Members
+</h1>
+<div class="card shadow mb-4">
+
+    <div class="card-header"> Details</div>
+    <div class="card-body" [ngClass]="{'formSubmitted':formSubmitted}">
+        <form [formGroup]="formGrp" autocomplete="off">
+
+            <!-- Form Row-->
+            <div class="row gx-3 mb-3">
+                <div class="col-md-6">
+                    <label class="small mb-1" for="name">Area name</label>
+                    <input class="form-control has-validation" formControlName="name" id="name" type="text"
+                        placeholder="Enter your first name" autocomplete="off">
+                </div>
+                <div class="col-md-6">
+                    <label class="small mb-1">Region</label>
+                    <ng-select [items]="regionList" formControlName="regionId" bindValue="regionId"
+                        bindLabel="regionName" [multiple]="false" placeholder="Please select region"
+                        [clearable]="false">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row gx-3 mt-5 mb-3">
+                <!-- Save changes button-->
+                <button class="col-md-2 btn btn-primary" (click)="submit()" type="button">Save changes</button>
+                <button class="col-md-1 btn btn-outline-primary ms-2" type="button"
+                    [routerLink]="['/dashboard/area-list']">
+                    <i class="bi bi-arrow-left"></i>
+                    Back
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="card-body px-4">
+
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<h1 class="h3 mb-5 text-gray-800">
+    <span><i class="bi bi-person-vcard-fill mr-2"></i></span>
+    Carecell
+</h1>
+<div class="card shadow mb-4" *ngIf="area.length">
+    <form [formGroup]="careForm" autocomplete="off">
+        <div class="card-header"> Add Carecell</div>
+        <div class="card-body" [ngClass]="{'formSubmitted':formSubmitted}">
+            <div class="row gx-3 mb-3">
+                <!-- Form Group (organization name)-->
+                <div class="col-md-6">
+                    <label class="small mb-1">Area</label>
+                    <ng-select [items]="area" formControlName="area" bindLabel="name" bindValue="id" [multiple]="false"
+                        placeholder="Please select area" [clearable]="false" (change)="getCarecellMembers()">
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

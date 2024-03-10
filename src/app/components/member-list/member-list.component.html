@@ -1,0 +1,93 @@
+<h1 class="h3 mb-5 text-gray-800">
+    <span><i class="bi bi-person-vcard-fill mr-2"></i></span>
+    Members
+</h1>
+
+<div class="card shadow mb-4" *ngIf="memberList.content">
+    <div class="card-header py-3">
+
+        <button type="button" class="btn btn-outline-primary float-end" [routerLink]="['/dashboard/member/add-member']">
+            <i class="bi bi-person-add"></i>
+            Add Member
+        </button>
+    </div>
+    <div class="card-body px-4">
+        <div class="row">
+            <div class="col-md-2">
+                <label>Name</label> <input type="text" [(ngModel)]="firstName" placeholder="Name" name=""
+                    class="form-control">
+            </div>
+            <div class="col-md-2">
+                Mobile <input type="text" [(ngModel)]="mobileNo" placeholder="Mobile number" class="form-control">
+            </div>
+            <div class="col-md-2">
+                Area <ng-select [items]="area" [(ngModel)]="areaId" bindLabel="name" bindValue="id" [multiple]="false"
+                    placeholder="Please select area" [clearable]="false">
+                </ng-select>
+            </div>
+            <div class="col-md-2">
+                &nbsp;
+                <button type="button" class="btn btn-outline-primary float-end mt-4" (click)="searchMembers()">
+                    <i class="bi bi-search"></i>
+                    Search
+                </button>
+            </div>
+
+            <div class="col-md-2">
+                &nbsp;
+                <button type="button" class="btn btn-success float-end mt-4" (click)="assignCarecell()">
+                    Assign Carecell
+                </button>
+            </div>
+        </div>
+        <table class="table table-bordered table-hover mt-5 shadow p-3 mb-5 bg-body rounded">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Mobile No</th>
+                    <th>Pastor</th>
+                    <th>Area</th>
+                    <th>Region</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="anchor" *ngFor="let mem of memberList.content; let i = index">
+                    <td>{{(i+1)+((pageNo-1)*size)}}</td>
+                    <td>{{mem.firstName}}</td>
+                    <td>{{mem.mobileNo}}</td>
+                    <td>{{mem.areaPastorName}}</td>
+                    <td>{{mem.areaName}}</td>
+                    <td>{{mem.regionName}}</td>
+                    <td>
+                        <span class="mr-2">
+                            <i [routerLink]="['/dashboard/member/edit-member', mem.id]" class="bi bi-pencil-square"></i>
+                        </span>
+                        &nbsp;
+                        <span class="ml-2">
+                            <input type="checkbox" (change)="checkCheckBoxvalue($event, mem.id, mem.areaId)"
+                                class="form-check-input ml-5">
+                        </span>
+                    </td>
+                </tr>
+                <tr *ngIf="memberList.content.length == 0">
+                    <td colspan="7" align="center">Records not found</td>
+                </tr>
+            </tbody>
+
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" *ngIf="pageNo > 1"><a class="page-link" href="javascript:void(0)"
+                        (click)="getAllMembers(this.pageNo-1)">Previous</a></li>
+                <ng-container *ngFor="let page of pagesArray">
+                    <li class="page-item" [ngClass]="{'active': page == pageNo}" (click)="getAllMembers(page)"><a
+                            class="page-link" href="javascript:void(0)">{{page}}</a></li>
+                </ng-container>
+                <li class="page-item" *ngIf="pageNo < memberList.totalPages" (click)="getAllMembers(this.pageNo+1)"><a
+                        class="page-link" href="javascript:void(0)">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

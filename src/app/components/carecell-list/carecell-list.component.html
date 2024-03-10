@@ -1,0 +1,64 @@
+<h1 class="h3 mb-5 text-gray-800">
+    <span><i class="bi bi-person-vcard-fill mr-2"></i></span>
+    Carecell
+</h1>
+
+<div class="card shadow mb-4" *ngIf="carecellList.content">
+    <div class="card-header py-3">
+
+        <button type="button" class="btn btn-outline-primary float-end" [routerLink]="['add']">
+            <i class="bi bi-person-add"></i>
+            Add Carecell
+        </button>
+    </div>
+    <div class="card-body px-4">
+        <table class="table table-bordered table-hover mt-5 shadow p-3 mb-5 bg-body rounded">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Carecell Name</th>
+                    <th>Members</th>
+                    <th>Pastor</th>
+                    <th>Area</th>
+                    <th>Region</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="anchor" *ngFor="let care of carecellList.content; let i = index">
+                    <td>{{(i+1)+((pageNo-1)*size)}}</td>
+                    <td>Carecell {{care.carecellId}}</td>
+                    <td>
+
+                        <div *ngIf="care.carecellMembers.length" class="member">
+                            <p *ngFor="let care of care.carecellMembers; let k = index">{{care.firstName}}
+                                ({{care.memberTypeDetails.memberType}})</p>
+                        </div>
+
+                    </td>
+                    <td>{{care.pastorName}}</td>
+                    <td>{{care.areaName}}</td>
+                    <td>{{care.regionName}}</td>
+                    <td [routerLink]="['/dashboard/edit-member', care.carecellId]"><i class="bi bi-pencil-square"></i>
+                    </td>
+                </tr>
+                <tr *ngIf="carecellList.content.length == 0">
+                    <td colspan="4" align="center">Records not found</td>
+                </tr>
+            </tbody>
+
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" *ngIf="pageNo > 1"><a class="page-link" href="javascript:void(0)"
+                        (click)="getAllList(this.pageNo-1)">Previous</a></li>
+                <ng-container *ngFor="let page of pagesArray">
+                    <li class="page-item" [ngClass]="{'active': page == pageNo}" (click)="getAllList(page)"><a
+                            class="page-link" href="javascript:void(0)">{{page}}</a></li>
+                </ng-container>
+                <li class="page-item" *ngIf="pageNo < carecellList.totalPages" (click)="getAllList(this.pageNo+1)"><a
+                        class="page-link" href="javascript:void(0)">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

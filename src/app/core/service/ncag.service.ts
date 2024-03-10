@@ -14,6 +14,9 @@ export class NcagService {
   public commonPOSTCall(url: string, data: any): any {
     return this.http.post(url, data);
   }
+  public commonPUTCall(url: string, data: any): any {
+    return this.http.put(url, data);
+  }
   public commonGETCall(url: string): any {
     return this.http.get(url);
   }

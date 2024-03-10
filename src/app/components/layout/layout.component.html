@@ -4,29 +4,34 @@
             <img src="/assets/images/image.png" />
         </div>
         <ul class="nav nav-pills flex-column mb-auto mt-5">
-            <li class="nav-item">
-                <a href="#" class="nav-link " aria-current="page">
+            <li class="nav-item" [routerLink]="['pastor-list']">
+                <a href="javascript:void(0)" class="nav-link " [routerLinkActive]="['active']">
                     Pastor<i class="bi bi-chevron-right float-end"></i>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link active">
+            <li class="nav-item" [routerLink]="['member']">
+                <a href="javascript:void(0)" class="nav-link" [routerLinkActive]="['active']">
                     Member<i class="bi bi-chevron-right float-end"></i>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
+            <li class="nav-item" [routerLink]="['carecell']">
+                <a href="javascript:void(0)" class="nav-link" [routerLinkActive]="['active']">
                     Carecell<i class="bi bi-chevron-right float-end"></i>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
+            <li class="nav-item" [routerLink]="['region-list']">
+                <a href="javascript:void(0)" class="nav-link" [routerLinkActive]="['active']">
                     Region<i class="bi bi-chevron-right float-end"></i>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
+            <li class="nav-item" [routerLink]="['area-list']">
+                <a href="javascript:void(0)" class="nav-link" [routerLinkActive]="['active']">
                     Area<i class="bi bi-chevron-right float-end"></i>
+                </a>
+            </li>
+            <li class="nav-item" [routerLink]="['carecell-cover']">
+                <a href="javascript:void(0)" class="nav-link" [routerLinkActive]="['active']">
+                    CareCell Cover<i class="bi bi-chevron-right float-end"></i>
                 </a>
             </li>
         </ul>
@@ -40,16 +45,15 @@
                     </p>
                 </div>
                 <div class="username">
-                    <div class="dropdown">
-                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="dropdown me-5">
+                        <button class="btn dropdown-toggle" (click)="menuToggle = !menuToggle" type="button">
                             Jegil Ebidoss
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
+                        <div class="dropdown-menu dropdown-menu-right" [ngClass]="{'d-block': menuToggle}">
+                            <button class="dropdown-item" type="button"
+                                [routerLink]="['/dashboard/reset-password']">Change Password</button>
+                            <button class="dropdown-item" type="button" (click)="logout()">Logout</button>
+                        </div>
                     </div>
                 </div>
 

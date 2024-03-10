@@ -1,0 +1,41 @@
+<h1 class="h3 mb-5 text-gray-800">
+    <span><i class="bi bi-person-vcard-fill mr-2"></i></span>
+    Region
+</h1>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+
+        <button type="button" class="btn btn-outline-primary float-end"
+            [routerLink]="['/dashboard/region-list/add-region/0']">
+            <i class="bi bi-person-add"></i>
+            Add Region
+        </button>
+    </div>
+    <div class="card-body px-4">
+        <table class="table table-bordered table-hover mt-5 shadow p-3 mb-5 bg-body rounded">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Region Name</th>
+                    <th>Area List</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="anchor" *ngFor="let reg of regionList.content; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{reg.regionName}}</td>
+                    <td>
+                        <p *ngFor="let a of reg.areaList">{{a.name}}, </p>
+                    </td>
+                    <td [routerLink]="['/dashboard/region-list/add-region', reg.regionId]"><i
+                            class="bi bi-pencil-square"></i>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
