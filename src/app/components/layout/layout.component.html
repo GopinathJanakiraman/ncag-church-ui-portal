@@ -1,4 +1,4 @@
-<main class="main">
+<main class="main" *ngIf="currentUrl !== '/dashboard/carecell-cover'">
     <aside class="sidebar">
         <div class="logo">
             <img src="/assets/images/image.png" />
@@ -69,4 +69,7 @@
         </footer>
     </section>
 
+</main>
+<main *ngIf="currentUrl == '/dashboard/carecell-cover'">
+    <router-outlet></router-outlet>
 </main>

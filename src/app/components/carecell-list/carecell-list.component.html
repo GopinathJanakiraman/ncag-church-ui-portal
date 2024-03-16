@@ -6,10 +6,10 @@
 <div class="card shadow mb-4" *ngIf="carecellList.content">
     <div class="card-header py-3">
 
-        <button type="button" class="btn btn-outline-primary float-end" [routerLink]="['add']">
+        <!--  <button type="button" class="btn btn-outline-primary float-end" [routerLink]="['add']">
             <i class="bi bi-person-add"></i>
             Add Carecell
-        </button>
+        </button> -->
     </div>
     <div class="card-body px-4">
         <table class="table table-bordered table-hover mt-5 shadow p-3 mb-5 bg-body rounded">
@@ -21,7 +21,7 @@
                     <th>Pastor</th>
                     <th>Area</th>
                     <th>Region</th>
-                    <th>Action</th>
+                    <!--  <th>Action</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -39,8 +39,8 @@
                     <td>{{care.pastorName}}</td>
                     <td>{{care.areaName}}</td>
                     <td>{{care.regionName}}</td>
-                    <td [routerLink]="['/dashboard/edit-member', care.carecellId]"><i class="bi bi-pencil-square"></i>
-                    </td>
+                    <!--  <td [routerLink]="['/dashboard/edit-member', care.carecellId]"><i class="bi bi-pencil-square"></i>
+                    </td> -->
                 </tr>
                 <tr *ngIf="carecellList.content.length == 0">
                     <td colspan="4" align="center">Records not found</td>
