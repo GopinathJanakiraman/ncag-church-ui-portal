@@ -3,7 +3,7 @@
     Members
 </h1>
 
-<div class="card shadow mb-4" *ngIf="memberList.content">
+<div class="card shadow mb-4" *ngIf="records">
     <div class="card-header py-3">
 
         <button type="button" class="btn btn-outline-primary float-end" [routerLink]="['/dashboard/member/add-member']">
@@ -43,7 +43,8 @@
         <table class="table table-bordered table-hover mt-5 shadow p-3 mb-5 bg-body rounded">
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>S No.</th>
+                    <th>Church Id</th>
                     <th>Name</th>
                     <th>Mobile No</th>
                     <th>Pastor</th>
@@ -53,8 +54,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="anchor" *ngFor="let mem of memberList.content; let i = index">
-                    <td>{{(i+1)+((pageNo-1)*size)}}</td>
+                <tr class="anchor" *ngFor="let mem of records; let i = index">
+                    <td>{{(i+1)+((currentPage-1)*size)}}</td>
+                    <td>{{mem.id}}</td>
                     <td>{{mem.firstName}}</td>
                     <td>{{mem.mobileNo}}</td>
                     <td>{{mem.areaPastorName}}</td>
@@ -71,23 +73,18 @@
                         </span>
                     </td>
                 </tr>
-                <tr *ngIf="memberList.content.length == 0">
-                    <td colspan="7" align="center">Records not found</td>
+                <tr *ngIf="records.length == 0">
+                    <td colspan="8" align="center">Records not found</td>
                 </tr>
             </tbody>
 
         </table>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item" *ngIf="pageNo > 1"><a class="page-link" href="javascript:void(0)"
-                        (click)="getAllMembers(this.pageNo-1)">Previous</a></li>
-                <ng-container *ngFor="let page of pagesArray">
-                    <li class="page-item" [ngClass]="{'active': page == pageNo}" (click)="getAllMembers(page)"><a
-                            class="page-link" href="javascript:void(0)">{{page}}</a></li>
-                </ng-container>
-                <li class="page-item" *ngIf="pageNo < memberList.totalPages" (click)="getAllMembers(this.pageNo+1)"><a
-                        class="page-link" href="javascript:void(0)">Next</a></li>
-            </ul>
-        </nav>
+        <div class="row">
+            <div class="col-md-12">
+                <pagination [totalItems]="totalCount" (pageChanged)="pageChanged($event)" [(ngModel)]="currentPage"
+                    [maxSize]="10" [itemsPerPage]="size" [boundaryLinks]="true"></pagination>
+            </div>
+        </div>
+
     </div>
 </div>

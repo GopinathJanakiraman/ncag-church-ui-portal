@@ -27,6 +27,7 @@ import { AddAreaComponent } from './components/add-area/add-area.component';
 import { AddPastorComponent } from './components/add-pastor/add-pastor.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { CarecellCoverComponent } from './components/carecell-cover/carecell-cover.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +59,7 @@ import { CarecellCoverComponent } from './components/carecell-cover/carecell-cov
       preventDuplicates: true,
     }),
     ModalModule.forRoot(),
+    PaginationModule
   ],
   providers: [
     NcagAuthGuard,

@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AreaListComponent implements OnInit {
   pagesArray: number[] = [];
-  size: number = 2;
+  size: number = 20;
   pageNo: number = 1;
   ActivityTableData: string = 'Activity Table Data';
 

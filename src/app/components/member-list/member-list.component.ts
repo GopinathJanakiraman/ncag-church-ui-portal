@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AppSettingsModule } from 'src/app/core/app-settings/app-settings-module';
 import { NcagService } from 'src/app/core/service/ncag.service';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { AssignCarecellComponent } from '../modal/assign-carecell/assign-carecell.component';
 import { ToastrService } from 'ngx-toastr';
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
+import { Subject, take, takeUntil } from 'rxjs';
 
 interface searchCriteria {
   page: number,
@@ -17,7 +19,7 @@ interface searchCriteria {
   styleUrls: ['./member-list.component.scss'],
 })
 export class MemberListComponent implements OnInit {
-  pageSize: number = 8;
+
 
   ActivityTableData: string = 'Activity Table Data';
 
@@ -34,36 +36,44 @@ export class MemberListComponent implements OnInit {
   mobileNo: string = '';
   areaId: number = 0;
   pagesArray: number[] = [];
-  size: number = 2;
-  pageNo: number = 1;
+  size: number = 50;
   checkedIds: number[] = [];
   areaIdCareCell: number[] = [];
   bsModalRef?: BsModalRef;
+  fnCalled: boolean = false;
+  currentPage = 1;
+  records: any = [];
+  totalCount: number = 0;
+  private destroy$ = new Subject<void>();
 
   constructor(private service: NcagService, private modalService: BsModalService, private toaster: ToastrService) { }
   ngOnInit() {
-    this.getAllMembers(this.pageNo);
+    this.getAllMembers(this.currentPage);
     this.getAllStaticContent();
   }
 
   getAllMembers(pageNo: number) {
     this.pagesArray = [];
     this.memberList = [];
-    this.pageNo = pageNo;
     this.service
-      .commonGETCall(AppSettingsModule.membersService + `?page=${pageNo - 1}&size=${this.size}`)
+      .commonGETCall(AppSettingsModule.membersService + `?page=${pageNo - 1}&size=${this.size}`).pipe(takeUntil(this.destroy$))
+
       .subscribe((dataset: any) => {
-        this.memberList = dataset;
-        let i = 1;
-        while (i <= dataset.totalPages) {
-          this.pagesArray.push(i);
-          i++;
-        }
+        this.records = dataset.content;
+        this.totalCount = dataset.totalElements;
+
 
       }, (err: any) => {
         this.toaster.error("Something went wrong", "Error !");
       });
   }
+
+  pageChanged(pageevent: PageChangedEvent) {
+    console.log('hi')
+    this.getAllMembers(pageevent.page);
+  }
+
+
   getAllStaticContent() {
     this.service
       .commonGETCall(AppSettingsModule.getAllStaticContent)
@@ -136,5 +146,9 @@ export class MemberListComponent implements OnInit {
     } else {
       this.toaster.warning("Please choose members from one area", "Warning ! No Member Selected");
     }
+  }
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
