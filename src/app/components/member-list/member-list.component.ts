@@ -1,11 +1,11 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AppSettingsModule } from 'src/app/core/app-settings/app-settings-module';
 import { NcagService } from 'src/app/core/service/ncag.service';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { AssignCarecellComponent } from '../modal/assign-carecell/assign-carecell.component';
 import { ToastrService } from 'ngx-toastr';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
-import { Subject, take, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 interface searchCriteria {
   page: number,
@@ -40,8 +40,8 @@ export class MemberListComponent implements OnInit {
   checkedIds: number[] = [];
   areaIdCareCell: number[] = [];
   bsModalRef?: BsModalRef;
-  fnCalled: boolean = false;
-  currentPage = 1;
+
+  currentPage: number = 1;
   records: any = [];
   totalCount: number = 0;
   private destroy$ = new Subject<void>();
@@ -69,7 +69,6 @@ export class MemberListComponent implements OnInit {
   }
 
   pageChanged(pageevent: PageChangedEvent) {
-    console.log('hi')
     this.getAllMembers(pageevent.page);
   }
 

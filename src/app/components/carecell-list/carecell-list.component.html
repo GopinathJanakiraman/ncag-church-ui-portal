@@ -3,7 +3,7 @@
     Carecell
 </h1>
 
-<div class="card shadow mb-4" *ngIf="carecellList.content">
+<div class="card shadow mb-4" *ngIf="records">
     <div class="card-header py-3">
 
         <!--  <button type="button" class="btn btn-outline-primary float-end" [routerLink]="['add']">
@@ -25,7 +25,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="anchor" *ngFor="let care of carecellList.content; let i = index">
+                <tr class="anchor" *ngFor="let care of records; let i = index">
                     <td>{{(i+1)+((pageNo-1)*size)}}</td>
                     <td>Carecell {{care.carecellId}}</td>
                     <td>
@@ -42,23 +42,17 @@
                     <!--  <td [routerLink]="['/dashboard/edit-member', care.carecellId]"><i class="bi bi-pencil-square"></i>
                     </td> -->
                 </tr>
-                <tr *ngIf="carecellList.content.length == 0">
+                <tr *ngIf="records.length == 0">
                     <td colspan="4" align="center">Records not found</td>
                 </tr>
             </tbody>
 
         </table>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item" *ngIf="pageNo > 1"><a class="page-link" href="javascript:void(0)"
-                        (click)="getAllList(this.pageNo-1)">Previous</a></li>
-                <ng-container *ngFor="let page of pagesArray">
-                    <li class="page-item" [ngClass]="{'active': page == pageNo}" (click)="getAllList(page)"><a
-                            class="page-link" href="javascript:void(0)">{{page}}</a></li>
-                </ng-container>
-                <li class="page-item" *ngIf="pageNo < carecellList.totalPages" (click)="getAllList(this.pageNo+1)"><a
-                        class="page-link" href="javascript:void(0)">Next</a></li>
-            </ul>
-        </nav>
+        <div class="row">
+            <div class="col-md-12">
+                <pagination [totalItems]="totalCount" (pageChanged)="pageChanged($event)" [(ngModel)]="currentPage"
+                    [maxSize]="10" [itemsPerPage]="size" [boundaryLinks]="true"></pagination>
+            </div>
+        </div>
     </div>
 </div>
