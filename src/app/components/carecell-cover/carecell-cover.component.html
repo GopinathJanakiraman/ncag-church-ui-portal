@@ -4,8 +4,12 @@
     </div>
     <div>
         <div class="row search">
-
-            <div class="col-md-2">
+            <div class="col-md-1">
+                Region <ng-select [items]="regionList" [(ngModel)]="regionId" bindLabel="regionName" [multiple]="false"
+                    placeholder="Please select region" [clearable]="false">
+                </ng-select>
+            </div>
+            <div class="col-md-1">
                 Area <ng-select [items]="area" [(ngModel)]="areaId" bindLabel="name" bindValue="id" [multiple]="false"
                     placeholder="Please select area" [clearable]="false">
                 </ng-select>
@@ -58,7 +62,8 @@
                             <tr *ngIf="people.memberTypeDetails.shortForm !== 'NC'">
 
                                 <td>{{people.memberTypeDetails.shortForm}}</td>
-                                <td>{{people.firstName}} [{{people.id}}]</td>
+                                <td>{{people.firstName}} [{{people.id}}]
+                                </td>
                             </tr>
 
                         </ng-container>
