@@ -15,7 +15,7 @@ export class CarecellCoverComponent implements OnInit {
   pagesArray: number[] = [];
   carecellList: any = [];
   areaId: number = 0;
-  regionId: any;
+  regionObject: any;
   week: string = 'I';
   month: string = new Date().toLocaleString('default', { month: 'short' });
   year: number = new Date().getFullYear();
@@ -33,6 +33,7 @@ export class CarecellCoverComponent implements OnInit {
         this.regionList = dataset.content;
         this.regionList.unshift({ regionId: 0, regionName: "Select Region", areaList: [] })
         console.log(this.regionList)
+        this.regionObject =this.regionList[1];
         this.search();
       }, (err: any) => {
         this.toaster.error("Something went wrong", "Error !");
@@ -72,8 +73,10 @@ export class CarecellCoverComponent implements OnInit {
       });
   }
   search() {
+    console.log(this.regionObject);
+    console.log(this.areaId);
     let searchParam = {
-      areaList: this.areaId ? this.areaId : this.regionId?.areaList.map((a: any) => a.id),
+      areaList: this.areaId ? [this.areaId] : this.regionObject?.areaList.map((a: any) => a.id),
       page: 0,
       size: 100000
     }
@@ -99,5 +102,11 @@ export class CarecellCoverComponent implements OnInit {
       a.document.close();
       a.print();
     }
+  }
+  resetReg(){
+    this.regionObject = this.regionList[0];
+  }
+  resetArea(){
+    this.areaId=0;
   }
 }

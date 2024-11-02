@@ -19,6 +19,7 @@
                     <th>Id</th>
                     <th>Region Name</th>
                     <th>Area List</th>
+                    <th>Pastor Name</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -27,8 +28,9 @@
                     <td>{{i+1}}</td>
                     <td>{{reg.regionName}}</td>
                     <td>
-                        <p *ngFor="let a of reg.areaList">{{a.name}}, </p>
+                        <span *ngFor="let a of reg.areaList">{{a.name}}, </span>
                     </td>
+                    <td>{{reg.pastorName}}</td>
                     <td [routerLink]="['/dashboard/region-list/add-region', reg.regionId]"><i
                             class="bi bi-pencil-square"></i>
                     </td>
