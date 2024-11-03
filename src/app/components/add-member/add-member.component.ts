@@ -71,10 +71,10 @@ export class AddMemberComponent implements OnInit {
       }),
       oldChurchId: [1],
       pastorId: [],
-      email: [null, [Validators.required, Validators.email]],
+      email: [null, [Validators.email]],
       firstName: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
-      mobileNo: [null, [Validators.required]],
+      mobileNo: [null, []],
       occupationId: [null, [Validators.required]],
       canVisitHouse: [false],
       isAttendingCHurch: [false],
@@ -90,7 +90,7 @@ export class AddMemberComponent implements OnInit {
       pincode: [null, [Validators.required]],
       memTypeId: [this.memberType[0], [Validators.required]],
       religionId: [null, [Validators.required]],
-      dob: [null, [Validators.required]],
+      dob: [null, []],
       createAt: null
     });
   }
