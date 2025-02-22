@@ -46,23 +46,23 @@
         <div class="printbody mt-5" id="printable">
             <ng-container *ngFor="let mem of carecellList.content;">
                 <ng-container *ngIf="mem.carecellMembers.length">
-                    <div class="mt-5">Address : {{mem.carecellMembers[0]?.address}}, {{mem.areaName}}</div>
+                    <div class="mt-5">Address : {{mem.carecellMembers[0]?.address}}, {{mem.areaName}},  {{mem.carecellMembers[0]?.areaDetails?.pincode}}</div>
                     <div class="row">
-                        <div class="col-md-1">Carecell : 00{{mem.carecellId}}</div>
-                        <div class="col-md-1">{{week}}/{{month}}/{{year}}</div>
+                        <div class="col-md-2">Carecell : 00{{mem.carecellId}}</div>
+                        <div class="col-md-1">{{week}}/{{month|uppercase }}/{{year}}</div>
                     </div>
-                    <div class="row">
+                   <!--  <div class="row">
                         <div class="col-md-2">Area Pastor : {{mem.pastorName}}</div>
-                    </div>
+                    </div> -->
                     <table>
                         <tr>
                             <td>Carecell Members</td>
                         </tr>
-                        <ng-container *ngFor="let people of mem.carecellMembers;">
+                        <ng-container *ngFor="let people of mem.carecellMembers;let i =index;">
                             <tr *ngIf="people.memberTypeDetails.shortForm !== 'NC'">
 
                                 <td>{{people.memberTypeDetails.shortForm}}</td>
-                                <td>{{people.firstName}} [{{people.id}}]
+                                <td>{{i+1}}. {{people.firstName}} [{{people.id}}]
                                 </td>
                             </tr>
 
@@ -80,6 +80,7 @@
                         </ng-container> -->
                     </table>
                 </ng-container>
+                <hr>
             </ng-container>
         </div>
 
