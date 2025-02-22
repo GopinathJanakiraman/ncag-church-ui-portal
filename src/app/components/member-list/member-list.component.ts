@@ -36,7 +36,7 @@ export class MemberListComponent implements OnInit {
   mobileNo: string = '';
   areaId: number = 0;
   pagesArray: number[] = [];
-  size: number = 500;
+  size: number = 5000;
   checkedIds: number[] = [];
   areaIdCareCell: number[] = [];
   bsModalRef?: BsModalRef;
