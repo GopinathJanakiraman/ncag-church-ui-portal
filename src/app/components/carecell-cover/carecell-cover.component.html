@@ -5,8 +5,8 @@
     <div>
         <div class="row search">
             <div class="col-md-2">
-                Region <ng-select [items]="regionList" [(ngModel)]="regionObject" bindLabel="regionName" [multiple]="false"
-                    placeholder="Please select region" [clearable]="false" (change)="resetArea()">
+                Region <ng-select [items]="regionList" [(ngModel)]="regionObject" bindLabel="regionName"
+                    [multiple]="false" placeholder="Please select region" [clearable]="false" (change)="resetArea()">
                 </ng-select>
             </div>
             <div class="col-md-2">
@@ -46,7 +46,8 @@
         <div class="printbody mt-5" id="printable">
             <ng-container *ngFor="let mem of carecellList.content;let k=index">
                 <ng-container *ngIf="mem.carecellMembers.length">
-                    <div class="mt-5">Address : {{mem.carecellMembers[0]?.address}}, {{mem.areaName}},  {{mem.carecellMembers[0]?.areaDetails?.pincode}}</div>
+                    <div class="mt-5">Address : {{mem.carecellMembers[0]?.address}}, {{mem.areaName}},
+                        {{mem.carecellMembers[0]?.areaDetails?.pincode}}</div>
                     <div class="row">
                         <div class="col-md-2">Carecell : 00{{mem.carecellId}}</div>
                         <div class="col-md-1">{{week}}/{{month|uppercase }}/{{year}}</div>
@@ -79,8 +80,9 @@
 
                         </ng-container> -->
                     </table>
+                    <hr>
                 </ng-container>
-                <hr *ngIf="k">
+
             </ng-container>
         </div>
 
